@@ -1,0 +1,27 @@
+{
+  "name": "coflare-backend",
+  "version": "1.0.0",
+  "description": "Backend repository for coflare",
+  "scripts": {
+    "build": "tsc --project tsconfig.prod.json && cpx \"src/utils/mail/**/*.html\" dist/utils/mail",
+    "start:dev": "nodemon --project tsconfig.dev.json",
+    "start:prod": "ts-node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
+    "axios": "^1.16.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "resend": "^6.12.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6"
+  }
+}
