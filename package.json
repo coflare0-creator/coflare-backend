@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend repository for coflare",
   "scripts": {
-    "build": "tsc --project tsconfig.prod.json && cpx \"src/utils/mail/**/*.html\" dist/utils/mail",
+    "build": "tsc --project tsconfig.prod.json",
     "start:dev": "nodemon --project tsconfig.dev.json",
     "start:prod": "ts-node dist/index.js",
     "test": "jest",
