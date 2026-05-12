@@ -55,7 +55,7 @@ export const sendSMS = async (alert: AlertPayload) => {
       {
         api_key: process.env.TERMII_API_KEY,
         to: phones,
-        from: "MoneySmith",
+        from: "COFLARE",
         sms: message,
         type: "plain",
         channel: "generic",
