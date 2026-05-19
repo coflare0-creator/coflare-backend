@@ -8,15 +8,7 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:8080",
-  "https://coflare.vercel.app",
-  // "http://localhost:5174",
-  // "https://encore-admin-dashboard.vercel.app",
-  // "https://encore-website.vercel.app",
-  // "https://encoreaitools.com",
-  // "https://admin.encoreaitools.com",
-];
+const allowedOrigins = ["http://localhost:8080", "https://coflare.org"];
 
 app.use(
   cors({

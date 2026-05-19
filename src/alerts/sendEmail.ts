@@ -1,14 +1,37 @@
 import { Resend } from "resend";
 import { supabase } from "../config/supabase";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface AlertPayload {
   incident_type: string;
   severity: number;
   location_name: string;
   description: string;
 }
+
+/**
+ * Environment-based configuration
+ */
+const ENV = process.env.NODE_ENV || "development";
+
+const config = {
+  development: {
+    apiKey: process.env.RESEND_API_KEY,
+    senderEmail: process.env.SENDER_EMAIL,
+    senderName: process.env.SENDER_NAME || "CO-FLARE DEV",
+  },
+  production: {
+    apiKey: process.env.RESEND_API_KEY_PROD,
+    senderEmail: process.env.SENDER_EMAIL_PROD,
+    senderName: process.env.SENDER_NAME_PROD || "CO-FLARE",
+  },
+}[ENV];
+
+// Safety check (prevents silent failures)
+if (!config?.apiKey || !config.senderEmail) {
+  throw new Error(`Missing email config for environment: ${ENV}`);
+}
+
+const resend = new Resend(config.apiKey);
 
 export const sendEmail = async (alert: AlertPayload) => {
   try {
@@ -28,10 +51,10 @@ export const sendEmail = async (alert: AlertPayload) => {
       throw new Error("No emails found");
     }
 
-    // 3. Send bulk email
+    // 3. Send email
     const response = await resend.emails.send({
-      from: `${process.env.SENDER_NAME} <${process.env.SENDER_EMAIL}>`,
-      to: "josiahelias11@gmail.com", //emails,
+      from: `${config.senderName} <${config.senderEmail}>`,
+      to: emails, // ✅ now actually using the list
       subject: "🚨 CO-FLARE ALERT",
       html: `
         <div style="font-family: sans-serif;">
