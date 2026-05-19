@@ -26,7 +26,6 @@ const config = {
   },
 }[ENV];
 
-// Safety check (prevents silent failures)
 if (!config?.apiKey || !config.senderEmail) {
   throw new Error(`Missing email config for environment: ${ENV}`);
 }
