@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { Request, Response } from "express";
 import { alertRoutes } from "./alerts/alerts.route";
+import { dashboardRoutes } from "./dashboard/dashboard.route";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/alerts", alertRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({ message: "Coflare backend server live" });
